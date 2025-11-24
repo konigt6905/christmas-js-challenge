@@ -10,6 +10,8 @@ import {
   Sparkles,
   ChevronLeft,
   ChevronRight,
+  Copy,
+  Check,
 } from 'lucide-react';
 import { executeCode } from '../utils/codeExecutor';
 import {
@@ -25,6 +27,7 @@ const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPr
   const [result, setResult] = useState(null);
   const [showSolution, setShowSolution] = useState(false);
   const [confetti, setConfetti] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const progress = getChallengeProgress(challenge.id);
@@ -61,6 +64,16 @@ const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPr
   const handleRevealSolution = () => {
     markAsRevealed(challenge.id);
     setShowSolution(true);
+  };
+
+  const handleCopySolution = async () => {
+    try {
+      await navigator.clipboard.writeText(challenge.solution);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
   };
 
   const progress = getChallengeProgress(challenge.id);
@@ -203,9 +216,27 @@ const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPr
         {/* Solution */}
         {showSolution && (
           <div className="glass-card p-6 border-2 border-christmas-gold/30 animate-fade-in-up">
-            <div className="flex items-center gap-2 mb-4">
-              <Eye className="w-5 h-5 text-christmas-gold" />
-              <h2 className="text-xl font-bold text-christmas-pine">Solution</h2>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Eye className="w-5 h-5 text-christmas-gold" />
+                <h2 className="text-xl font-bold text-christmas-pine">Solution</h2>
+              </div>
+              <button
+                onClick={handleCopySolution}
+                className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-christmas-gold/10 text-christmas-gold transition-all"
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-4 h-4" />
+                    <span className="text-sm font-semibold">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-4 h-4" />
+                    <span className="text-sm font-semibold">Copy</span>
+                  </>
+                )}
+              </button>
             </div>
             <CodeEditor value={challenge.solution} readOnly />
           </div>

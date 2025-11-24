@@ -57,13 +57,6 @@ const CodeEditor = ({ value, onChange, readOnly = false }) => {
         }}
         spellCheck="false"
       />
-
-      {/* Read-only Overlay */}
-      {readOnly && (
-        <div className="absolute top-2 right-2 px-3 py-1 bg-christmas-gold/80 text-white text-xs font-semibold rounded-full">
-          Solution
-        </div>
-      )}
     </div>
   );
 };

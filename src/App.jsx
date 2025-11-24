@@ -119,6 +119,7 @@ function App() {
             />
             <ProgressBar
               totalChallenges={filteredChallenges.length}
+              challengeIds={filteredChallenges.map(c => c.id)}
               onReset={handleResetProgress}
             />
           </div>

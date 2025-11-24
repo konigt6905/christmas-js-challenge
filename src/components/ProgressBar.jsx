@@ -1,8 +1,8 @@
 import { Trophy, Star, Eye } from 'lucide-react';
 import { getOverallProgress } from '../utils/progress';
 
-const ProgressBar = ({ totalChallenges, onReset }) => {
-  const progress = getOverallProgress(totalChallenges);
+const ProgressBar = ({ totalChallenges, challengeIds, onReset }) => {
+  const progress = getOverallProgress(totalChallenges, challengeIds);
 
   return (
     <div className="glass-card p-6 border-2 border-christmas-gold/30 animate-fade-in-up">

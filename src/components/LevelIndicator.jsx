@@ -20,9 +20,9 @@ const LevelIndicator = ({ currentLevel, onLevelChange }) => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 glass-card px-4 py-3 rounded-xl border-2 border-christmas-gold/30 animate-fade-in-up">
+    <div className="flex items-center justify-center md:justify-between gap-2 sm:gap-4 glass-card px-2 sm:px-4 py-2 sm:py-3 rounded-xl border-2 border-christmas-gold/30 animate-fade-in-up">
       {/* Level Tabs */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2 md:flex-1 min-w-0">
         {levels.map((level) => {
           const Icon = level.icon;
           const levelProg = getLevelProgress(level.range);
@@ -33,25 +33,25 @@ const LevelIndicator = ({ currentLevel, onLevelChange }) => {
             <button
               key={level.value}
               onClick={() => onLevelChange(level.value)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 ${
+              className={`flex items-center gap-1 sm:gap-2 px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all duration-200 ${
                 isActive
                   ? `${level.color} text-white shadow-md`
                   : 'bg-white/50 hover:bg-white text-christmas-pine/70 hover:text-christmas-pine'
               }`}
             >
-              <Icon className={`w-4 h-4 ${isActive ? 'text-white' : level.textColor}`} />
-              <span className="font-semibold text-sm">{level.label}</span>
+              <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? 'text-white' : level.textColor}`} />
+              <span className="font-semibold text-xs sm:text-sm">{level.label}</span>
               {!isActive && percentage > 0 && (
-                <span className="text-xs opacity-60">({levelProg.completed}/{levelProg.total})</span>
+                <span className="hidden sm:inline text-xs opacity-60">({levelProg.completed}/{levelProg.total})</span>
               )}
             </button>
           );
         })}
       </div>
 
-      {/* Current Level Progress */}
+      {/* Current Level Progress - Hidden on mobile */}
       {currentLevel && (
-        <div className="flex items-center gap-2 text-sm">
+        <div className="hidden md:flex items-center gap-2 text-sm flex-shrink-0">
           <div className="text-christmas-pine/70">
             {getLevelProgress(levels.find(l => l.value === currentLevel).range).completed}/30
           </div>

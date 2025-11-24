@@ -86,10 +86,20 @@ export const saveUserCode = (challengeId, userCode) => {
   });
 };
 
-export const getOverallProgress = (totalChallenges) => {
+export const getOverallProgress = (totalChallenges, challengeIds = null) => {
   const progress = getProgress();
-  const answered = Object.values(progress).filter((p) => p.answered).length;
-  const revealed = Object.values(progress).filter((p) => p.revealed && !p.answered).length;
+
+  // If specific challenge IDs are provided, filter by those IDs
+  let answered, revealed;
+  if (challengeIds && challengeIds.length > 0) {
+    answered = challengeIds.filter(id => progress[id]?.answered).length;
+    revealed = challengeIds.filter(id => progress[id]?.revealed && !progress[id]?.answered).length;
+  } else {
+    // Original behavior: count all challenges
+    answered = Object.values(progress).filter((p) => p.answered).length;
+    revealed = Object.values(progress).filter((p) => p.revealed && !p.answered).length;
+  }
+
   const percentage = totalChallenges > 0 ? Math.round((answered / totalChallenges) * 100) : 0;
 
   return {

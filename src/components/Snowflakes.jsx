@@ -6,7 +6,11 @@ const Snowflakes = () => {
   useEffect(() => {
     const createSnowflakes = () => {
       const flakes = [];
-      for (let i = 0; i < 50; i++) {
+      // Reduce snowflakes on mobile devices
+      const isMobile = window.innerWidth < 768;
+      const snowflakeCount = isMobile ? 20 : 50;
+
+      for (let i = 0; i < snowflakeCount; i++) {
         flakes.push({
           id: i,
           left: Math.random() * 100,
@@ -20,6 +24,14 @@ const Snowflakes = () => {
     };
 
     createSnowflakes();
+
+    // Recreate snowflakes on resize to adjust count
+    const handleResize = () => {
+      createSnowflakes();
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   return (

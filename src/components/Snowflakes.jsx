@@ -1,0 +1,46 @@
+import { useEffect, useState } from 'react';
+
+const Snowflakes = () => {
+  const [snowflakes, setSnowflakes] = useState([]);
+
+  useEffect(() => {
+    const createSnowflakes = () => {
+      const flakes = [];
+      for (let i = 0; i < 50; i++) {
+        flakes.push({
+          id: i,
+          left: Math.random() * 100,
+          animationDuration: 5 + Math.random() * 10,
+          opacity: 0.3 + Math.random() * 0.7,
+          fontSize: 10 + Math.random() * 20,
+          delay: Math.random() * 5,
+        });
+      }
+      setSnowflakes(flakes);
+    };
+
+    createSnowflakes();
+  }, []);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50">
+      {snowflakes.map((flake) => (
+        <div
+          key={flake.id}
+          className="snowflake absolute"
+          style={{
+            left: `${flake.left}%`,
+            animationDuration: `${flake.animationDuration}s`,
+            opacity: flake.opacity,
+            fontSize: `${flake.fontSize}px`,
+            animationDelay: `${flake.delay}s`,
+          }}
+        >
+          ❄
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Snowflakes;

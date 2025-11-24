@@ -1,0 +1,162 @@
+@import "tailwindcss";
+
+@theme {
+  /* Christmas Colors */
+  --color-christmas-red: #C41E3A;
+  --color-christmas-green: #0F7F3E;
+  --color-christmas-gold: #FFD700;
+  --color-christmas-snow: #FFFAFA;
+  --color-christmas-pine: #01411C;
+  --color-christmas-holly: #8B0000;
+  --color-christmas-ice: #E0F7FA;
+  --color-christmas-midnight: #191970;
+
+  /* Custom Animations */
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-snow-fall: snowFall 10s linear infinite;
+  --animate-twinkle: twinkle 2s ease-in-out infinite;
+  --animate-bounce-slow: bounce 3s infinite;
+  --animate-spin-slow: spin 8s linear infinite;
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-jingle: jingle 0.5s ease-in-out;
+  --animate-glow: glow 2s ease-in-out infinite;
+  --animate-fade-in-up: fadeInUp 0.8s cubic-bezier(0.22, 0.68, 0, 1);
+  --animate-scale-in: scaleIn 0.5s cubic-bezier(0.22, 0.68, 0, 1);
+  --animate-chat-open: slideUp 0.3s ease-out;
+  --animate-shimmer: shimmer 2s infinite;
+
+  /* Keyframes */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes snowFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0.7; }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.95); }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  @keyframes jingle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+  }
+
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6); }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    0% {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    0% { transform: translateY(10px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+}
+
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #E0F7FA, #FFFAFA);
+}
+
+* {
+  &:focus-visible {
+    outline: 2px solid var(--color-christmas-gold);
+    outline-offset: 2px;
+  }
+}
+
+.text-gradient-christmas {
+  background: linear-gradient(135deg, #C41E3A 0%, #0F7F3E 50%, #FFD700 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 30, 58, 0.2);
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.festive-shadow {
+  box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2), 0 5px 15px rgba(15, 127, 62, 0.1);
+}
+
+/* Snowflake animation styles */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  z-index: 9999;
+  user-select: none;
+  pointer-events: none;
+  color: white;
+  animation: snowFall linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFAFA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #C41E3A, #0F7F3E);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #8B0000, #01411C);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

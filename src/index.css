@@ -95,14 +95,15 @@
 }
 
 html {
-  background: linear-gradient(to bottom, #E0F7FA, #FFFAFA);
-  overscroll-behavior: none;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #E0F7FA, #FFFAFA) fixed;
+  background-color: #E0F7FA;
 }
 
 body {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #E0F7FA, #FFFAFA);
-  overscroll-behavior: none;
+  background: linear-gradient(to bottom, #E0F7FA, #FFFAFA) fixed;
+  background-color: #E0F7FA;
 }
 
 * {
@@ -138,10 +139,12 @@ body {
   z-index: 9999;
   user-select: none;
   pointer-events: none;
-  color: white;
-  -webkit-text-fill-color: white;
-  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
+  color: white !important;
+  -webkit-text-fill-color: white !important;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.9)) brightness(2);
   animation: snowFall linear infinite;
+  font-variation-settings: 'COLR' 0;
 }
 
 /* Custom scrollbar */

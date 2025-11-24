@@ -48,7 +48,7 @@ const Snowflakes = () => {
             animationDelay: `${flake.delay}s`,
           }}
         >
-          ❄
+          <span style={{ color: 'white', WebkitTextFillColor: 'white' }}>✻</span>
         </div>
       ))}
     </div>

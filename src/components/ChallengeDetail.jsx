@@ -21,6 +21,8 @@ import {
   saveUserCode,
 } from '../utils/progress';
 import CodeEditor from './CodeEditor';
+import EmojiRain from './EmojiRain';
+import GiftEasterEgg from './GiftEasterEgg';
 
 const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPrevious }) => {
   const [code, setCode] = useState('');
@@ -52,7 +54,6 @@ const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPr
         message: 'Correct! Well done!',
       });
       setConfetti(true);
-      setTimeout(() => setConfetti(false), 3000);
     } else {
       setResult({
         success: false,
@@ -80,24 +81,14 @@ const ChallengeDetail = ({ challenge, onBack, onNext, onPrevious, hasNext, hasPr
 
   return (
     <div className="min-h-screen py-16 px-4">
-      {/* Confetti Effect */}
-      {confetti && (
-        <div className="fixed inset-0 pointer-events-none z-50">
-          {[...Array(30)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-snow-fall text-2xl"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDuration: `${2 + Math.random() * 2}s`,
-                animationDelay: `${Math.random() * 0.5}s`,
-              }}
-            >
-              {['🎉', '⭐', '🎄', '🎁', '❄️'][Math.floor(Math.random() * 5)]}
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Success Emoji Rain */}
+      <EmojiRain
+        active={confetti}
+        onComplete={() => setConfetti(false)}
+        emojiSet={['🎉', '⭐', '🎄', '🎁', '❄️', '✨', '🏆', '💯']}
+        duration={3500}
+        count={60}
+      />
 
       <div className="max-w-5xl mx-auto">
         {/* Header */}

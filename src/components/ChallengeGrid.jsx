@@ -1,5 +1,6 @@
 import { CheckCircle, Eye, Gift } from 'lucide-react';
 import { getChallengeProgress } from '../utils/progress';
+import GiftEasterEgg from './GiftEasterEgg';
 
 const ChallengeCard = ({ challenge, onClick, displayNumber }) => {
   const progress = getChallengeProgress(challenge.id);
@@ -66,6 +67,7 @@ const ChallengeGrid = ({ challenges, onChallengeClick }) => {
           <h2 className="text-4xl sm:text-5xl font-bold text-christmas-pine mb-4">
             Choose Your{' '}
             <span className="text-gradient-christmas">Challenge</span>
+            {' '}<GiftEasterEgg />
           </h2>
           <p className="text-lg text-christmas-pine/70">
             Select any challenge to start coding. Solve them in any order!

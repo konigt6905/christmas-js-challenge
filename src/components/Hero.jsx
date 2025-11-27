@@ -1,4 +1,5 @@
 import { Sparkles, Gift, Code, Star } from 'lucide-react';
+import GiftEasterEgg from './GiftEasterEgg';
 
 const Hero = ({ onStartClick }) => {
   return (
@@ -59,6 +60,7 @@ const Hero = ({ onStartClick }) => {
           <span className="text-christmas-pine">
             Challenge
           </span>
+          {' '}<GiftEasterEgg />
         </h1>
 
         {/* Subheadline */}

@@ -3,6 +3,7 @@ import { highlightJavaScript } from '../utils/syntaxHighlight';
 
 const CodeEditor = ({ value, onChange, readOnly = false }) => {
   const textareaRef = useRef(null);
+  const preRef = useRef(null);
   const [highlightedCode, setHighlightedCode] = useState('');
 
   useEffect(() => {
@@ -28,11 +29,19 @@ const CodeEditor = ({ value, onChange, readOnly = false }) => {
     }
   };
 
+  const handleScroll = (e) => {
+    if (preRef.current) {
+      preRef.current.scrollTop = e.target.scrollTop;
+      preRef.current.scrollLeft = e.target.scrollLeft;
+    }
+  };
+
   return (
     <div className="relative font-mono text-sm bg-white rounded-lg border-2 border-gray-200 overflow-hidden">
       {/* Highlighted Code Display */}
       <pre
-        className="absolute top-0 left-0 w-full h-full p-4 overflow-auto pointer-events-none"
+        ref={preRef}
+        className="absolute top-0 left-0 w-full h-full p-4 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
         <code
@@ -47,8 +56,9 @@ const CodeEditor = ({ value, onChange, readOnly = false }) => {
         value={value}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
+        onScroll={handleScroll}
         readOnly={readOnly}
-        className={`relative w-full min-h-[300px] p-4 bg-transparent resize-y outline-none font-mono text-sm caret-christmas-red ${
+        className={`relative w-full min-h-[300px] p-4 bg-transparent resize-y outline-none font-mono text-sm caret-christmas-red leading-normal whitespace-pre-wrap break-words overflow-auto ${
           readOnly ? 'cursor-default' : ''
         }`}
         style={{
